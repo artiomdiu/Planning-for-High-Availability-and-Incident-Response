@@ -1,13 +1,13 @@
 terraform {
    backend "s3" {
-     bucket = "udacity-tf-ad-east-2"
+     bucket = "udacity-tf-ad-west-1"
      key    = "terraform/terraform.tfstate"
-     region = "us-east-2"
+     region = "us-west-1"
    }
  }
 
  provider "aws" {
-   region = "us-east-2"
+   region = "us-west-1"
    #profile = "default"
    
    default_tags {
