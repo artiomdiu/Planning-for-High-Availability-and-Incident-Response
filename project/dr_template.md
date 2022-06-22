@@ -39,4 +39,6 @@ Following steps shall be done:
 6. Set-up monitoring and alerting.
 
 ## Steps:
-You won't actually perform these steps, but write out what you would do to "fail-over" your application and database cluster to the other region. Think about all the pieces that were setup and how you would use those in the other region.
+In case of failover in one region, following steps shall be done:
+* Promote RDS-s in us-west-1 region to primary DB in AWS console.
+* Check whether traffic to Udacity-web is redirected to us-west-1 region.
