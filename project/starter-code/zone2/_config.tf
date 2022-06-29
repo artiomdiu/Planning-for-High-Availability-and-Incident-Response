@@ -6,20 +6,20 @@ terraform {
    }
  }
 
-# provider "aws" {
-#   region = "us-west-1"
-#   #profile = "default"
-   
-#   default_tags {
-#   tags = local.tags
-#   }
-# }
-
 provider "aws" {
-  alias  = "usw1"
   region = "us-west-1"
+  #profile = "default"
 
   default_tags {
-     tags = local.tags
+  tags = local.tags
   }
 }
+
+# provider "aws" {
+#   alias  = "usw1"
+#   region = "us-west-1"
+# 
+#   default_tags {
+#      tags = local.tags
+#   }
+# }
