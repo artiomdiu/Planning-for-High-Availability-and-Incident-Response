@@ -1,4 +1,5 @@
 variable primary_db_cluster_arn {}
+variable primary_db_cluster_instance_arn {}
 
 resource "aws_rds_cluster_parameter_group" "cluster_pg-s" {
   name   = "udacity-pg-s"
