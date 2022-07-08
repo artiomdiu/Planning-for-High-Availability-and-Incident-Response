@@ -2,6 +2,7 @@
 
 ## AWS Zones
 us-east-2
+us-west-1
 
 ## Servers and Clusters
 
@@ -10,10 +11,10 @@ us-east-2
 |------------|-------------------|------------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | Asset name | Brief description | AWS size eg. t3.micro (if applicable, not all assets will have a size) | Number of nodes/replicas or just how many of a particular asset | Identify if this asset is deployed to DR, replicated, created in multiple locations or just stored elsewhere |
 | EC2 Ubuntu-Web | A web server using Flask | t3.micro | 1 | The application is running on 1 instance in us-est-2 region and 2 instances in us-west-1 region. |
-| Custom Ubuntu image | Image of Flask web application | - | - |  |
-| RDS for Ubuntu-web | Aurora MySQL database is used by web service | Aurora MySQL | 1 | DB is run on 1 instance, has no replication and no snapshots. |
-| NLB for Monitoring platform | Disctribute traffic between monitoring stack kubernetes cluster nodes | - | 1 | Configured to run on 2 AZs. |
-| udacity-cluster | Kubernetes cluster for monitoring stack | t3.medium | 1 node | Cluster has one node running, but can provision 2 nodes in total. Configured to run in 2 AZs |
+| Custom Ubuntu image | Image of Flask web application | - | - | Image source code is stored in publicly available Github repository. |
+| RDS for Ubuntu-web | Aurora MySQL database is used by web service | Aurora MySQL | 4 | Primary RDS is running on 2 instances in us-east-2 regionand replicates to secondary RDS that is running on 2 instances in us-west-1 region. |
+| NLB for Monitoring platform | Distribute traffic between monitoring stack kubernetes cluster nodes | - | 2 | 1 NLB is running in us-east-2, another - in us-west-1 regions. |
+| udacity-cluster | Kubernetes cluster for monitoring stack | t3.medium | 4 nodes | Cluster has 2 nodes running in us-east-2 region and another 2 nodes running in us-west-1 region. |
 | Monitoring platform for web application| Prometheus and Grafana used for monitoring and alerting | - | - | Configuration is not backed up. Grafana web available publicly |
 | S3 bucket for storing Terraform code locally | Store and execute Terraform code | S3 bucket | 1 | Available only from private network |
 | GitHub repo storing Terraform code | Infrastructure automation (IaaC) | - | - | Github publicly available. All sensitive data shall be stored as environment variables |
