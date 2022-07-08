@@ -10,19 +10,21 @@ us-west-1
 | Asset      | Purpose           | Size                                                                   | Qty                                                             | DR                                                                                                           |
 |------------|-------------------|------------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | Asset name | Brief description | AWS size eg. t3.micro (if applicable, not all assets will have a size) | Number of nodes/replicas or just how many of a particular asset | Identify if this asset is deployed to DR, replicated, created in multiple locations or just stored elsewhere |
-| EC2 Ubuntu-Web | A web server using Flask | t3.micro | 1 | The application is running on 1 instance in us-est-2 region and 2 instances in us-west-1 region. |
+| EC2 Ubuntu-Web | A web server using Flask | t3.micro | 3 | The application is running on 3 instances. Multi AZ. |
+| ALB | Aplication Load Balancer is used for traffic distribution between EC2 Ubuntu-web assets | - | 1 | Multi AZ. |
+| VPC | Virtual Private Network for EC2 instances and EKS clusters | - | 1 | Multi AZ.  |
 | Custom Ubuntu image | Image of Flask web application | - | - | Image source code is stored in publicly available Github repository. |
-| RDS for Ubuntu-web | Aurora MySQL database is used by web service | Aurora MySQL | 4 | Primary RDS is running on 2 instances in us-east-2 regionand replicates to secondary RDS that is running on 2 instances in us-west-1 region. |
-| NLB for Monitoring platform | Distribute traffic between monitoring stack kubernetes cluster nodes | - | 2 | 1 NLB is running in us-east-2, another - in us-west-1 regions. |
-| udacity-cluster | Kubernetes cluster for monitoring stack | t3.medium | 4 nodes | Cluster has 2 nodes running in us-east-2 region and another 2 nodes running in us-west-1 region. |
-| Monitoring platform for web application| Prometheus and Grafana used for monitoring and alerting | - | 2 | Configuration is not backed up. Grafana web available publicly |
-| S3 bucket for storing Terraform code locally | Store and execute Terraform code | S3 bucket | 2 | 1 S3 bucket in us-east-1 region and 1 S3 bucket in us-west-1 region. Available only from private network. |
+| RDS for Ubuntu-web | Aurora MySQL database is used by web service | Aurora MySQL | 2 | Primary RDS is running on 2 instances in us-east-2 region and replicates to secondary RDS that is running on 2 instances in us-west-1 region. |
+| NLB for Monitoring platform | Distribute traffic between monitoring stack kubernetes cluster nodes | - | 1 | - |
+| udacity-cluster | Kubernetes cluster for monitoring stack | t3.medium | 2 nodes | 2 nodes. Multi AZ. |
+| Monitoring platform for web application| Prometheus and Grafana used for monitoring and alerting | - | 1 | Configuration is not backed up. Grafana web available publicly |
+| S3 bucket for storing Terraform code locally | Store and execute Terraform code | S3 bucket | 1 | Available only from private network. |
 | GitHub repo storing Terraform code | Infrastructure automation (IaaC) | - | 1 | Github publicly available. All sensitive data shall be stored as environment variables |
-| SSH keys | Used to get access to EC2 instances | - | 2 | Shall be stored securely. |
+| SSH keys | Used to get access to EC2 instances | - | 1 | Shall be stored securely. |
 | AWS credentials | Access Amazon web console for resource management | - | 1 | Use strong password. Use MFA. Limit access to others |
 
 ### Descriptions
-There is a Flask web service running on 1 instance, using Aurora MySQL database that runs on 1 instance and Monitoring stack (Prometheus + Grafana) running in Kubernetes cluster on 1-2 nodes. The IT assets are configured to run in 2 availability zones (us-east-2b, us-east-2c), but in one region. Grafana LB is accessible publicly. The Terraform code is stored in public GitHub repo and in Amazon S3 bucket, from which it can be run. 
+There is a Flask web service running on EC2 instances using Aurora MySQL database that replicates to another region and Monitoring stack (Prometheus + Grafana) running in Kubernetes cluster on 2 nodes. The IT assets are configured to run in multi availability zones in us-east-2 and us-west-1 regions. Grafana LB is accessible publicly. The Terraform code is stored in public GitHub repo and in Amazon S3 bucket, from which it can be run. 
 
 ## DR Plan
 ### Pre-Steps:
