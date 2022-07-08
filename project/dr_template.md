@@ -9,7 +9,7 @@ us-east-2
 | Asset      | Purpose           | Size                                                                   | Qty                                                             | DR                                                                                                           |
 |------------|-------------------|------------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | Asset name | Brief description | AWS size eg. t3.micro (if applicable, not all assets will have a size) | Number of nodes/replicas or just how many of a particular asset | Identify if this asset is deployed to DR, replicated, created in multiple locations or just stored elsewhere |
-| EC2 Ubuntu-Web | A web server using Flask | t3.micro | 1 | The application is running on one instance in one region, configured to run in 2 AZs. |
+| EC2 Ubuntu-Web | A web server using Flask | t3.micro | 1 | The application is running on 1 instance in us-est-2 region and 2 instances in us-west-1 region. |
 | Custom Ubuntu image | Image of Flask web application | - | - |  |
 | RDS for Ubuntu-web | Aurora MySQL database is used by web service | Aurora MySQL | 1 | DB is run on 1 instance, has no replication and no snapshots. |
 | NLB for Monitoring platform | Disctribute traffic between monitoring stack kubernetes cluster nodes | - | 1 | Configured to run on 2 AZs. |
