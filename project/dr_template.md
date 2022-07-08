@@ -1,8 +1,7 @@
 # Infrastructure
 
 ## AWS Zones
-us-east-2
-us-west-1
+us-east-2, us-west-1
 
 ## Servers and Clusters
 
@@ -14,7 +13,7 @@ us-west-1
 | ALB | Aplication Load Balancer is used for traffic distribution between EC2 Ubuntu-web assets | - | 1 | Multi AZ. |
 | VPC | Virtual Private Network for EC2 instances and EKS clusters | - | 1 | Multi AZ.  |
 | Custom Ubuntu image | Image of Flask web application | - | - | Image source code is stored in publicly available Github repository. |
-| RDS for Ubuntu-web | Aurora MySQL database is used by web service | Aurora MySQL | 2 | Primary RDS is running on 2 instances in us-east-2 region and replicates to secondary RDS that is running on 2 instances in us-west-1 region. |
+| RDS for Ubuntu-web | Aurora MySQL database is used by web service | Aurora MySQL | 2 | Primary RDS is running on 2 instances in us-east-2 region and replicates to secondary RDS that is running on 2 instances in us-west-1 region. Both RDS has a 5 day backup window. |
 | NLB for Monitoring platform | Distribute traffic between monitoring stack kubernetes cluster nodes | - | 1 | - |
 | udacity-cluster | Kubernetes cluster for monitoring stack | t3.medium | 2 nodes | 2 nodes. Multi AZ. |
 | Monitoring platform for web application| Prometheus and Grafana used for monitoring and alerting | - | 1 | Configuration is not backed up. Grafana web available publicly |
